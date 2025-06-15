@@ -1,4 +1,3 @@
-
 package dao;
 
 import java.sql.PreparedStatement;
@@ -11,47 +10,91 @@ import java.util.logging.Logger;
 import model.Student;
 import utill.DbUtill;
 
-
 public class StudentDao {
-   
-   
+
     static PreparedStatement ps;
     static ResultSet rs;
     static String sql;
-    
-    public static List<Student> getAllStudents(){
+
+    public static List<Student> getAllStudents() {
         List<Student> students = new ArrayList<>();
-    
+
         sql = "select * from student";
-        
+
         try {
-            ps = DbUtill.getCon().prepareCall(sql);
-            
+            ps = DbUtill.getCon().prepareStatement(sql);
+
             rs = ps.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 Student s = new Student(rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("email"),
                         rs.getString("contactNo"));
-                
+
                 students.add(s);
-                
-                rs.close();
-                ps.close();
-                DbUtill.getCon().close();
-            
-            
+
             }
+            System.out.println(students);
+
+            rs.close();
+            ps.close();
+            DbUtill.getCon().close();
+
         } catch (SQLException ex) {
             Logger.getLogger(StudentDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+
+        
         return students;
-    
-    
+
+    }
+
+    public static int saveStudent(Student s) {
+        int status = 0;
+        sql = "insert into student(name, email, contactNo) values(?,?,?)";
+
+        try {
+            ps = DbUtill.getCon().prepareStatement(sql);
+            ps.setString(1, s.getName());
+            ps.setString(2, s.getEmail());
+            ps.setString(3, s.getContactNo());
+
+            status = ps.executeUpdate();
+
+            System.out.println(status);
+
+            ps.close();
+            DbUtill.getCon().close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return status;
     }
     
     
     
+    public static void deleteStudent(int id){
+        
+        sql = "delete from student where id = ? ";
+        
+        try {
+            ps= DbUtill.getCon().prepareStatement(sql);
+            
+            ps.setInt(1, id);
+            
+            ps.executeUpdate();
+            
+            ps.close();
+            DbUtill.getCon().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    
+    
+    }
+
 }

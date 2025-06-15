@@ -1,4 +1,13 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="model.Student"%>
+<%@page import="dao.StudentDao"%>
+<%@page import="java.util.*" %>
+
 <%@include file="header.jsp" %>
+
+<br>
+<br>
+<br>
 
 
 <%
@@ -31,7 +40,8 @@
                 <td>${s.getContactNo()}</td>
                 <td>
                     <button type="submit" class="btn btn-primary">Edit</button>
-                    <button type="submit" class="btn btn-warning">Delete</button>
+                    <a href="deletestudent.jsp?id=${s.id}" class="btn btn-danger"
+                       onclick="return confirm('Are you sure you want to delete this student');">Delete</a>
                 </td>
 
             </tr>
@@ -45,6 +55,18 @@
 
 </div>
 
+<br>
+<br>
+<br> 
+<br>
+<br>
+<br>    
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
 <%@include file="footer.jsp" %>

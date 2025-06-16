@@ -17,7 +17,29 @@
 %>
 
 <div class="container">
-    <h1 class="text-primary text-center">All Student</h1> 
+    
+    <h1 class="text-dark text-center " style="background-color: #d9d9d9" >All Student Details</h1> 
+    
+    
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="navbar-brand" href="addstudentform.jsp" "><button class="btn btn-info me-md-2" type="button" style="width: 200px; 
+                  height: 40px;  background-color: #2ed6db;  animation-name: example;
+                  animation-iteration-count: infinite; animation-duration: 4s"><h5>Add New Student</h5></button></a>
+  
+  <style>
+       @keyframes example {
+  0%   {background-color: red;}
+  25%   {background-color: danger;}
+  25%   {background-color: warning;}
+  25%  {background-color: yellow;}
+  25%  {background-color: info;}
+  100% {background-color: white;}
+}
+  </style>
+ 
+        
+    </div>
+    
 
     <table class="table table-striped">
 
@@ -32,26 +54,28 @@
         </thead>
 
         <tbody>
-        <c:forEach items="${list}" var="s">
-            <tr>
-                <td>${s.getId()}</td>
-                <td>${s.getName()}</td>
-                <td>${s.getEmail()}</td>
-                <td>${s.getContactNo()}</td>
-                <td>
-                    <button type="submit" class="btn btn-primary">Edit</button>
-                    <a href="deletestudent.jsp?id=${s.id}" class="btn btn-danger"
-                       onclick="return confirm('Are you sure you want to delete this student');">Delete</a>
-                </td>
+            <c:forEach items="${list}" var="s">
+                <tr>
+                    <td>${s.getId()}</td>
+                    <td>${s.getName()}</td>
+                    <td>${s.getEmail()}</td>
+                    <td>${s.getContactNo()}</td>
+                    <td>
+                        <a href="editstudentform.jsp?id=${s.id}" class="btn btn-primary">Edit</a>
+                        <a href="deletestudent.jsp?id=${s.id}" class="btn btn-danger"
+                           onclick="return confirm('Are you sure you want to delete this student');">Delete</a>
+                    </td>
 
-            </tr>
+                </tr>
 
-        </c:forEach>
+            </c:forEach>
 
         </tbody>
 
 
     </table>
+
+
 
 </div>
 

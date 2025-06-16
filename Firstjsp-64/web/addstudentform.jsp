@@ -8,8 +8,8 @@
 
 
 <div class="container my-3">
-    <div class="bg-success text-center">
-        <h1 class="jumborton">Add Student</h1>
+    <div class=" text-center" style="background-color: #8829a1;">
+        <h1 class="jumborton" style="color: white">Fill-Up The Form</h1>
     </div>
     <!--    start form-->
     <form action="addstudent.jsp"  method="post">

@@ -94,7 +94,70 @@ public class StudentDao {
         }
         
     
+    }
+    
+    public static Student getById(int id ){
+        Student s = null;
+        
+        sql = "select * from student where id=?";
+        
+        try {
+            ps = DbUtill.getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                s= new Student(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("contactNo")
+                );
+              
+            }
+            
+            rs.close();
+            ps.close();
+            DbUtill.getCon().close();
+                        
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        return s;
+    
     
     }
+    
+    
+    
+    public static int updateStudent(Student s){
+        int status = 0;
+        
+        sql ="update student set name=?, email=?, contactNo=? where id=?";
+        
+        try {
+            ps = DbUtill.getCon().prepareStatement(sql);
+            ps.setString(1, s.getName());
+            ps.setString(2, s.getEmail());
+            ps.setString(3, s.getContactNo());
+            ps.setInt(4, s.getId());
+            
+            status = ps.executeUpdate();
+            
+            System.out.println(status);
+            
+            ps.close();
+            DbUtill.getCon().close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+    
+    }
+    
 
 }

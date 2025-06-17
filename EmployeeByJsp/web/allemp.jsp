@@ -6,7 +6,7 @@
 <%@include file="header.jsp" %>
 
 <%
-    List<Emp> lsit= EmpDao.getAllEmp();
+    List<Emp> list= EmpDao.getAllEmp();
     request.setAttribute("list", list);
 
 

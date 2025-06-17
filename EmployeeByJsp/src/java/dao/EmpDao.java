@@ -39,7 +39,7 @@ public class EmpDao {
 
     }
 
-    public static List<Emp> getAllEmp() {
+    public static List<Emp> getAllEmp(){
         List<Emp> emps = new ArrayList<>();
 
         sql = "select * from emp";
